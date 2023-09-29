@@ -1,0 +1,77 @@
+https://dbdiagram.io/
+
+
+TABLE history {
+	Id integer [pk, increment] 
+	timerec datetime
+	field1 BIGINT
+	field2 BIGINT
+	field3 BIGINT
+	field4 BIGINT
+	}
+
+
+TABLE roles {
+	Id integer [pk]
+ 	role varchar
+}
+
+TABLE employees {
+	Id integer [pk, increment] 
+ 	employee varchar
+  roleid integer 
+
+}
+Ref:  employees.roleid  > roles.Id 
+
+  TABLE operative {
+	Id integer [pk, increment] 
+	date datetime
+	field integer
+	content varchar
+  employeeId integer 
+}
+  Ref:  operative.employeeId  > employees.Id 
+
+  TABLE spares {
+	Id integer [pk, increment] 
+	spare varchar
+	manufacturer varchar
+}
+
+    TABLE repairs {
+	Id integer [pk, increment] 
+	date datetime
+	field integer
+	content varchar
+ 	employeeId integer
+	spareId integer
+}
+  Ref:  repairs.employeeId  > employees.Id  
+  Ref:  repairs.spareId   > spares.Id
+
+    TABLE types {
+	Id integer [pk, increment] 
+ 	type varchar
+}
+
+  TABLE equipments {
+	Id integer [pk, increment] 
+ 	equipment varchar
+	typeId integer
+}
+
+  Ref:  equipments.typeId  > types.Id
+
+
+  TABLE services {
+	Id integer [pk, increment] 
+	date datetime
+	field integer
+	content varchar
+	employeeId integer
+	equipmentId integer
+}
+
+  Ref:  services.employeeId  > employees.Id  
+  Ref:  services.equipmentId   > equipments.Id 
